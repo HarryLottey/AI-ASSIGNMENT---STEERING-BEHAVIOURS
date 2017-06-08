@@ -24,7 +24,7 @@ public class Spawner : MonoBehaviour
     Vector3 GenerteRandomPoint()
     {
         // SET halfScale to half of the transform's scale
-        Vector3 halfScale = transform.localScale / 2;
+        Vector3 halfScale = transform.localScale / 2; // * 0.5f
         // SET randomPoint vector to zero
         randomPoint = Vector3.zero;
         // SET randomPoint x,y,z to random range between
@@ -43,8 +43,8 @@ public class Spawner : MonoBehaviour
         GameObject clone = Instantiate(prefab);
         // ADD clone to objects list
         objects.Add(clone);
-        // SET clone's posiiton to spawner position + position
-        clone.transform.position = transform.position + position;
+        // SET clone's posiiton to position
+        clone.transform.position = position;
         // SET clone's rotation to rotation
         clone.transform.rotation = rotation;
     }
@@ -58,10 +58,10 @@ public class Spawner : MonoBehaviour
         // IF spawnTimer > spawnRate
         if(spawnTimer > spawnRate)
         {
-            // SET randomPoint to GenerateRandomPoint()
+            // SET spawner position + randomPoint to GenerateRandomPoint()
             randomPoint = GenerteRandomPoint();
             // CALL Spawn() and pass GenerateRandomPoint(), Quarternion identity
-            Spawn(randomPoint,Quaternion.identity);
+            Spawn(transform.position + randomPoint,Quaternion.identity);
             // SET spawnTimer to zero
             spawnTimer = 0f;
         }

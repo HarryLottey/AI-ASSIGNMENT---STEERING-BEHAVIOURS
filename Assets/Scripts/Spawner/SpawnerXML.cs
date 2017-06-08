@@ -36,7 +36,7 @@ public class SpawnerXML : MonoBehaviour
         // Create a serializer of type XMLContainer
         XmlSerializer serializer = new XmlSerializer(typeof(XMLContainer));
         // Open a file stream at path using Create file mode
-        using (FileStream stream = new FileStream(path, FileMode.Create))
+        using (FileStream stream = new FileStream(path, FileMode.Open))
         {
             // RETURN the deserialized stream as XML container
             return serializer.Deserialize(stream) as XMLContainer;
